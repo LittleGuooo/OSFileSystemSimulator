@@ -33,7 +33,7 @@ void dir(FCB& directory, string argument);
 void rmdir(FCB& parentDir, string dirName, string argument);
 void rm(FCB& parentDir, string fileName);
 void cd(string dirName);
-bool open(string fileName, const ios_base::openmode& openmode);
+bool open(string fileName, const ios_base::openmode& openmode = ios_base::in);
 void close(string fileName);
 void read(string fileName);
 void write(string fileName);
@@ -149,7 +149,7 @@ void runShell()
 				}
 				else if (command == "open")
 				{
-					open(argument, NULL);
+					open(argument);
 				}
 				else if (command == "close")
 				{
@@ -182,7 +182,10 @@ void runShell()
 				else if (command == "rmdir")
 				{
 					rmdir(*curDirPtr, argument, argument1);
-					getline(cin, input);
+					if (argument1 == "")
+					{
+						getline(cin, input);
+					}
 				}
 				else if (command == "rm")
 				{

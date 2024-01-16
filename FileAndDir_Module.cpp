@@ -331,7 +331,7 @@ void cd(string dirName)
 }
 
 // 打开文件
-bool open(string fileName, const ios_base::openmode& openmode) {
+bool open(string fileName, const ios_base::openmode& openmode = ios_base::in) {
 	// 查找文件是否存在
 	auto it = find_if(curDirPtr->fd->directoryEntries.begin(),
 		curDirPtr->fd->directoryEntries.end(), EqualTargetFileName(fileName));
@@ -539,8 +539,8 @@ void chmod(string fileName, string newPermission) {
 	}
 
 	// 解析数字字符
-	string ownerPermission = PermissionDigitToBinary(newPermission[0] - '0');
-	string otherPermission = PermissionDigitToBinary(newPermission[1] - '0');
+	string ownerPermission = PermissionDigitToBinary(newPermission[0]);
+	string otherPermission = PermissionDigitToBinary(newPermission[1]);
 
 	// 检查数字范围
 	if (ownerPermission == "" || otherPermission == "") {
